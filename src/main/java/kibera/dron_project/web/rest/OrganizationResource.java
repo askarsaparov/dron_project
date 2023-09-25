@@ -17,15 +17,14 @@ public class OrganizationResource {
     }
 
     @GetMapping("/organization")
-    public ResponseEntity getAll() {
+    public ResponseEntity<?> getAll() {
         List<Organization> organizationList =  organizationService.findAll();
         return ResponseEntity.ok(organizationList);
     }
 
     @PostMapping("/organization")
-    public ResponseEntity create(@RequestBody Organization organization) {
-        Organization organization1 =  organizationService.save(organization);
-        return ResponseEntity.ok(organization);
+    public ResponseEntity<?> create(@RequestBody Organization organization) {
+        return ResponseEntity.ok(organizationService.save(organization));
     }
 
     @GetMapping("/organization/{id}") // This maps to a GET request with a path parameter {id}
@@ -40,7 +39,7 @@ public class OrganizationResource {
     }
 
     @PutMapping("/organization")
-    public ResponseEntity update( @RequestBody Organization organization) {
+    public ResponseEntity<?> update( @RequestBody Organization organization) {
 //        if (organization.getId() == null) {
 //            return ResponseEntity.badRequest().build();
 //        }

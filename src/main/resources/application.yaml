@@ -1,0 +1,17 @@
+server:
+  port: 8079
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gumbaz_db  # JDBC URL for your MySQL server
+    username: gumbaz_user  # Replace with your MySQL username
+    password: gumbaz_password  # Replace with your MySQL password
+  jpa:
+    hibernate:
+      ddl-auto: update  # Hibernate schema generation strategy (update, create, none, validate, ...)
+    show-sql: true  # Show SQL  Replace with your application name
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+springdoc:
+  swagger-ui:
+    path: /api/swagger-ui/

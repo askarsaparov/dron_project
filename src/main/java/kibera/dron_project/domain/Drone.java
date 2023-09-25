@@ -43,10 +43,10 @@ public class Drone implements Serializable{
     @Enumerated(EnumType.STRING)
     private Mood mood;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Organization owner;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Employee operator;
 
     @Column(name = "status", nullable = false)

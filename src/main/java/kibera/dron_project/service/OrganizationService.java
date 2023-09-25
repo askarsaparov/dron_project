@@ -2,17 +2,15 @@ package kibera.dron_project.service;
 
 import kibera.dron_project.domain.Organization;
 import kibera.dron_project.repository.OrganizationRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class OrganizationService {
     private final OrganizationRepository organizationRepository;
-
-    public OrganizationService(OrganizationRepository organizationRepository) {
-        this.organizationRepository = organizationRepository;
-    }
 
     public Organization save(Organization organization) {
         return organizationRepository.save(organization);
