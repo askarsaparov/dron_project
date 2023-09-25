@@ -26,8 +26,7 @@ public class EmployeeService {
     }
 
     public void delete(Long id) {
-        Employee employee = employeeRepository.getOne(id);
-        employeeRepository.delete(employee);
+        employeeRepository.deleteById(id);
     }
 
     public List<EmployeeDTO> getAllEmployee() {

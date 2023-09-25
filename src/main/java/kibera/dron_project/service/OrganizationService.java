@@ -27,8 +27,7 @@ public class OrganizationService {
     }
 
     public void delete(Long id) {
-        Organization organization = organizationRepository.getOne(id);
-        organizationRepository.delete(organization);
+        organizationRepository.deleteById(id);
     }
 
 //    public List<Organization> findByName(String name) {

@@ -23,8 +23,7 @@ public class DroneService {
     }
 
     public void delete(Long id) {
-        Drone drone = droneRepository.getOne(id);
-        droneRepository.delete(drone);
+        droneRepository.deleteById(id);
     }
 
     public List<DroneDTO> getAllDrone() {
