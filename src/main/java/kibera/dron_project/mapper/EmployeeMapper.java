@@ -13,7 +13,7 @@ public class EmployeeMapper {
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .surname(entity.getSurname())
-                .organization(OrganizationMapper.toDTO(entity.getOrganization() != null ? entity.getOrganization() : null))
+                .organization(OrganizationMapper.toDTO(entity.getOrganization()))
                 .position(entity.getPosition())
                 .birthday(entity.getBirthday())
                 .placeOfBirth(entity.getPlaceOfBirth())

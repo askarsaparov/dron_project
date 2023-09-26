@@ -7,10 +7,12 @@ import kibera.dron_project.mapper.DroneMapper;
 import kibera.dron_project.repository.DroneRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class DroneService {
     private final DroneRepository droneRepository;
