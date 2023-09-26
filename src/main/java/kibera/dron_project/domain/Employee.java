@@ -20,7 +20,7 @@ public class Employee implements Serializable {
     @Column(name = "surname")
     private String surname;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Organization organization;
 
     @Column(name = "position")
