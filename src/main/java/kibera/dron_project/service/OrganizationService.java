@@ -1,6 +1,8 @@
 package kibera.dron_project.service;
 
 import kibera.dron_project.domain.Organization;
+import kibera.dron_project.repository.DroneRepository;
+import kibera.dron_project.repository.EmployeeRepository;
 import kibera.dron_project.repository.OrganizationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrganizationService {
     private final OrganizationRepository organizationRepository;
+    private final EmployeeRepository employeeRepository;
+    private final DroneRepository droneRepository;
 
     public Organization save(Organization organization) {
         return organizationRepository.save(organization);
@@ -25,6 +29,9 @@ public class OrganizationService {
     }
 
     public void delete(Long id) {
+
+        employeeRepository.setNullWhichHasDeletedOrganization(id);
+
         organizationRepository.deleteById(id);
     }
 

@@ -5,17 +5,16 @@ import kibera.dron_project.domain.Employee;
 import kibera.dron_project.dto.EmployeeDTO;
 import kibera.dron_project.mapper.EmployeeMapper;
 import kibera.dron_project.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
 
 
     public EmployeeDTO findById(Long id) {
@@ -26,6 +25,7 @@ public class EmployeeService {
     }
 
     public void delete(Long id) {
+
         employeeRepository.deleteById(id);
     }
 
