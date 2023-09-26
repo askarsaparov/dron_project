@@ -4,6 +4,7 @@ import kibera.dron_project.domain.Drone;
 import kibera.dron_project.domain.Employee;
 import kibera.dron_project.domain.Organization;
 import kibera.dron_project.dto.DroneDTO;
+import kibera.dron_project.dto.DroneSaveDTO;
 
 public class DroneMapper {
     public static DroneDTO toDTO(Drone entity) {
@@ -18,13 +19,13 @@ public class DroneMapper {
                 .countryOrigin(entity.getCountryOrigin())
                 .productionYear(entity.getProductionYear())
                 .mood(entity.getMood())
-                .ownerId(entity.getOwner() != null ? entity.getOwner().getId() : null)
-                .operatorId(entity.getOperator() != null ? entity.getOperator().getId() : null)
+                .owner(OrganizationMapper.toDTO(entity.getOwner()))
+                .operatorId(EmployeeMapper.toDTO(entity.getOperator()))
                 .status(entity.getStatus())
                 .build();
     }
 
-    public static Drone toEntity(DroneDTO dto) {
+    public static Drone toEntity(DroneSaveDTO dto) {
         return new Drone()
                 .id(dto.getId())
                 .drone_id(dto.getDrone_id())
@@ -39,4 +40,5 @@ public class DroneMapper {
                 .operator(dto.getOperatorId() != null ? new Employee().id(dto.getOperatorId()) : null)
                 .status(dto.getStatus());
     }
+
 }

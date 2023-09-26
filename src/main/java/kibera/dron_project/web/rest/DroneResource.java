@@ -1,7 +1,7 @@
 package kibera.dron_project.web.rest;
 
 import kibera.dron_project.dto.DroneDTO;
-import kibera.dron_project.dto.EmployeeDTO;
+import kibera.dron_project.dto.DroneSaveDTO;
 import kibera.dron_project.service.DroneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class DroneResource {
     }
 
     @PostMapping("/drone")
-    public ResponseEntity<?> create(@RequestBody DroneDTO droneDTO) {
+    public ResponseEntity<?> create(@RequestBody DroneSaveDTO droneDTO) {
         return ResponseEntity.ok(
                 droneService.createDrone(droneDTO)
         );
@@ -40,7 +40,7 @@ public class DroneResource {
     }
 
     @PutMapping("/drone")
-    public ResponseEntity<?> update(@RequestBody DroneDTO droneDTO) {
+    public ResponseEntity<?> update(@RequestBody DroneSaveDTO droneDTO) {
         return ResponseEntity.ok(
                 droneService.updateDrone(droneDTO)
         );

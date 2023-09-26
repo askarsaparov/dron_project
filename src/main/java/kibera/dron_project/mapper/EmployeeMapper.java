@@ -7,6 +7,11 @@ import kibera.dron_project.dto.EmployeeSaveDTO;
 
 public class EmployeeMapper {
     public static EmployeeDTO toDTO(Employee entity) {
+
+        if(entity == null) {
+            return null;
+        }
+
         return EmployeeDTO
                 .builder()
                 .id(entity.getId())

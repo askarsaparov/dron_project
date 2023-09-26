@@ -9,7 +9,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DroneDTO {
+public class DroneSaveDTO {
+
     private Long id;
     private String drone_id;
     private String name;
@@ -19,7 +20,8 @@ public class DroneDTO {
     private String countryOrigin;
     private Long productionYear;
     private Mood mood;
-    private OrganizationDTO owner;
-    private EmployeeDTO operatorId;
+    private Long ownerId;
+    private Long operatorId;
     private Status status;
+
 }

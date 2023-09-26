@@ -3,6 +3,7 @@ package kibera.dron_project.service;
 import jakarta.persistence.EntityNotFoundException;
 import kibera.dron_project.domain.Drone;
 import kibera.dron_project.dto.DroneDTO;
+import kibera.dron_project.dto.DroneSaveDTO;
 import kibera.dron_project.mapper.DroneMapper;
 import kibera.dron_project.repository.DroneRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,13 +37,13 @@ public class DroneService {
                 .toList();
     }
 
-    public DroneDTO createDrone(DroneDTO droneDTO) {
+    public DroneDTO createDrone(DroneSaveDTO droneDTO) {
         return DroneMapper.toDTO(
                 droneRepository.save(DroneMapper.toEntity(droneDTO))
         );
     }
 
-    public DroneDTO updateDrone(DroneDTO droneDTO) {
+    public DroneDTO updateDrone(DroneSaveDTO droneDTO) {
         return DroneMapper.toDTO(
                 droneRepository.save(DroneMapper.toEntity(droneDTO))
         );
