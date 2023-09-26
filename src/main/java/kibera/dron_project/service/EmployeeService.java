@@ -3,7 +3,9 @@ package kibera.dron_project.service;
 import jakarta.persistence.EntityNotFoundException;
 import kibera.dron_project.domain.Employee;
 import kibera.dron_project.dto.EmployeeDTO;
+import kibera.dron_project.dto.EmployeeSaveDTO;
 import kibera.dron_project.mapper.EmployeeMapper;
+import kibera.dron_project.repository.DroneRepository;
 import kibera.dron_project.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
+
     private final EmployeeRepository employeeRepository;
-
-
+    private final DroneRepository droneRepository;
 
     public EmployeeDTO findById(Long id) {
         return employeeRepository
@@ -25,6 +27,8 @@ public class EmployeeService {
     }
 
     public void delete(Long id) {
+
+        droneRepository.setNullWhichHasDeletedEmployee(id);
 
         employeeRepository.deleteById(id);
     }
@@ -37,24 +41,17 @@ public class EmployeeService {
                 .toList();
     }
 
-    public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
+    public EmployeeDTO createEmployee(EmployeeSaveDTO employeeDTO) {
         return EmployeeMapper.toDTO(
                 employeeRepository.save(EmployeeMapper.toEntity(employeeDTO))
         );
     }
 
-    public EmployeeDTO updateEmployee(EmployeeDTO employeeDTO) {
+    public EmployeeDTO updateEmployee(EmployeeSaveDTO employeeDTO) {
         return EmployeeMapper.toDTO(
                 employeeRepository.save(EmployeeMapper.toEntity(employeeDTO))
         );
     }
 
-//    public List<Employee> findByName(String name) {
-//        return employeeRepository.findByName(name);
-//    }
-
-//    public List<Employee> findAllByParam(String name) {
-//        return employeeRepository.findAllByLikeNative(name);
-//    }
 
 }

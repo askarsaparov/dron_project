@@ -3,6 +3,7 @@ package kibera.dron_project.mapper;
 import kibera.dron_project.domain.Employee;
 import kibera.dron_project.domain.Organization;
 import kibera.dron_project.dto.EmployeeDTO;
+import kibera.dron_project.dto.EmployeeSaveDTO;
 
 public class EmployeeMapper {
     public static EmployeeDTO toDTO(Employee entity) {
@@ -12,15 +13,15 @@ public class EmployeeMapper {
                 .firstName(entity.getFirstName())
                 .lastName(entity.getLastName())
                 .surname(entity.getSurname())
-                .organizationId(entity.getOrganization() != null ? entity.getOrganization().getId() : null)
+                .organization(OrganizationMapper.toDTO(entity.getOrganization() != null ? entity.getOrganization() : null))
                 .position(entity.getPosition())
                 .birthday(entity.getBirthday())
                 .placeOfBirth(entity.getPlaceOfBirth())
-                .pasportData(entity.getPasportData())
+                .passportData(entity.getPasportData())
                 .build();
     }
 
-    public static Employee toEntity(EmployeeDTO dto) {
+    public static Employee toEntity(EmployeeSaveDTO dto) {
         return new Employee()
                 .id(dto.getId())
                 .firstName(dto.getFirstName())
@@ -30,7 +31,7 @@ public class EmployeeMapper {
                 .position(dto.getPosition())
                 .birthday(dto.getBirthday())
                 .placeOfBirth(dto.getPlaceOfBirth())
-                .pasportData(dto.getPasportData());
+                .pasportData(dto.getPassportData());
     }
 
 }

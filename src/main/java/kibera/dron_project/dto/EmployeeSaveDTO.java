@@ -9,13 +9,13 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeDTO {
+public class EmployeeSaveDTO {
 
     private Long id;
     private String firstName;
     private String lastName;
     private String surname;
-    private OrganizationDTO organization;
+    private Long organizationId;
     private String position;
     private LocalDate birthday;
     private String placeOfBirth;

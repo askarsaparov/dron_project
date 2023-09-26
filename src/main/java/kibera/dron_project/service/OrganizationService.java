@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class OrganizationService {
+
     private final OrganizationRepository organizationRepository;
     private final EmployeeRepository employeeRepository;
     private final DroneRepository droneRepository;
@@ -31,16 +32,9 @@ public class OrganizationService {
     public void delete(Long id) {
 
         employeeRepository.setNullWhichHasDeletedOrganization(id);
+        droneRepository.setNullWhichHasDeletedOrganization(id);
 
         organizationRepository.deleteById(id);
     }
-
-//    public List<Organization> findByName(String name) {
-//        return organizationRepository.findByName(name);
-//    }
-
-//    public List<Organization> findAllByParam(String name) {
-//        return organizationRepository.findAllByLikeNative(name);
-//    }
 
 }

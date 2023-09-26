@@ -1,6 +1,6 @@
 package kibera.dron_project.web.rest;
-import kibera.dron_project.domain.Employee;
 import kibera.dron_project.dto.EmployeeDTO;
+import kibera.dron_project.dto.EmployeeSaveDTO;
 import kibera.dron_project.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class EmployeeResource {
     }
 
     @PostMapping("/employee")
-    public ResponseEntity<?> create(@RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<?> create(@RequestBody EmployeeSaveDTO employeeDTO) {
         return ResponseEntity.ok(
                 employeeService.createEmployee(employeeDTO)
         );
@@ -41,7 +41,7 @@ public class EmployeeResource {
     }
 
     @PutMapping("/employee")
-    public ResponseEntity<?> update(@RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<?> update(@RequestBody EmployeeSaveDTO employeeDTO) {
         return ResponseEntity.ok(
                 employeeService.updateEmployee(employeeDTO)
         );
@@ -53,15 +53,4 @@ public class EmployeeResource {
         return ResponseEntity.ok("Qator o'chirildi");
     }
 
-//    @GetMapping("/employee/{name}")
-//    public ResponseEntity<?> getAll(@PathVariable String name) {
-//        List<Employee> employeeList =  employeeService.findByName(name);
-//        return ResponseEntity.ok(employeeList);
-//    }
-
-//    @GetMapping("/employee/search")
-//    public ResponseEntity<?> getAllSearch(@RequestParam String name) {
-//        List<Employee> employeeList =  employeeService.findAllByParam(name);
-//        return ResponseEntity.ok(employeeList);
-//    }
 }
