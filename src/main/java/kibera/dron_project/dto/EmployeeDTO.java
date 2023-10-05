@@ -1,8 +1,10 @@
 package kibera.dron_project.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.time.LocalDate;
+
 
 @Getter
 @Setter
@@ -17,6 +19,7 @@ public class EmployeeDTO {
     private String surname;
     private OrganizationDTO organization;
     private String position;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     private String placeOfBirth;
     private String passportData;

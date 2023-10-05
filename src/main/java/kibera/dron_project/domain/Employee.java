@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Table(name="employee")
 @Entity
-public class Employee implements Serializable {
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

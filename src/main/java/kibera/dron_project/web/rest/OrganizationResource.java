@@ -1,7 +1,7 @@
 package kibera.dron_project.web.rest;
-import kibera.dron_project.domain.Employee;
 import kibera.dron_project.domain.Organization;
 import kibera.dron_project.service.OrganizationService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,33 +40,19 @@ public class OrganizationResource {
 
     @PutMapping("/organization")
     public ResponseEntity<?> update( @RequestBody Organization organization) {
-//        if (organization.getId() == null) {
-//            return ResponseEntity.badRequest().build();
-//        }
 
         Organization organization1 = organizationService.save(organization);
         if (organization != null) {
-            return ResponseEntity.ok(organization);
+            return ResponseEntity.ok(organization1);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/organization/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         organizationService.delete(id);
-        return ResponseEntity.ok("Qator o'chirildi");
     }
 
-//    @GetMapping("/organization/{name}")
-//    public ResponseEntity<?> getAll(@PathVariable String name) {
-//        List<Organization> organizationList =  organizationService.findByName(name);
-//        return ResponseEntity.ok(organizationList);
-//    }
-
-//    @GetMapping("/organization/search")
-//    public ResponseEntity<?> getAllSearch(@RequestParam String name) {
-//        List<Organization> organizationList =  organizationService.findAllByParam(name);
-//        return ResponseEntity.ok(organizationList);
-//    }
 }

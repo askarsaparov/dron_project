@@ -4,6 +4,7 @@ import kibera.dron_project.dto.DroneDTO;
 import kibera.dron_project.dto.DroneSaveDTO;
 import kibera.dron_project.service.DroneService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,9 +47,9 @@ public class DroneResource {
         );
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/drone/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         droneService.delete(id);
-        return ResponseEntity.ok("Qator o'chirildi");
     }
 }

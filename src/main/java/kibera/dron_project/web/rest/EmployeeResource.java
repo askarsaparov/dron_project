@@ -2,6 +2,7 @@ package kibera.dron_project.web.rest;
 import kibera.dron_project.dto.EmployeeDTO;
 import kibera.dron_project.dto.EmployeeSaveDTO;
 import kibera.dron_project.service.EmployeeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,10 +48,10 @@ public class EmployeeResource {
         );
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/employee/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         employeeService.delete(id);
-        return ResponseEntity.ok("Qator o'chirildi");
     }
 
 }

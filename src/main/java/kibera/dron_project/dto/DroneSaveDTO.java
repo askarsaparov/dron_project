@@ -23,5 +23,6 @@ public class DroneSaveDTO {
     private Long ownerId;
     private Long operatorId;
     private Status status;
+    private Boolean target;
 
 }

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface DroneRepository extends JpaRepository<Drone, Long> {
     @Modifying
@@ -16,5 +18,8 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
     @Modifying
     @Query("UPDATE Drone d SET d.operator = null WHERE d.operator.id = :operatorId")
     void setNullWhichHasDeletedEmployee(@Param("operatorId") Long id);
+
+    @Query("select dr from Drone dr where dr.drone_id = :droneId and dr.target = true")
+    Drone getDroneByDroneId(@Param("droneId") String droneId);
 
 }

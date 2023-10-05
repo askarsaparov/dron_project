@@ -3,7 +3,6 @@ import jakarta.persistence.*;
 import kibera.dron_project.enums.Mood;
 import kibera.dron_project.enums.Status;
 
-import java.io.Serializable;
 import lombok.*;
 
 @Builder
@@ -13,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Table(name="drone")
 @Entity
-public class Drone implements Serializable{
+public class Drone {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -52,6 +51,9 @@ public class Drone implements Serializable{
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @Column(name = "target")
+    private Boolean target;
 
     public Drone id(Long id) {
         this.id = id;
@@ -110,6 +112,11 @@ public class Drone implements Serializable{
 
     public Drone status(Status status) {
         this.status = status;
+        return this;
+    }
+
+    public Drone target(Boolean target) {
+        this.target = target;
         return this;
     }
 }
