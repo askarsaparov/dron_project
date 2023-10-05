@@ -19,7 +19,7 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
     @Query("UPDATE Drone d SET d.operator = null WHERE d.operator.id = :operatorId")
     void setNullWhichHasDeletedEmployee(@Param("operatorId") Long id);
 
-    @Query("select dr from Drone dr where dr.drone_id = :droneId and dr.target = true")
+    @Query("select dr from Drone dr where dr.drone_id = :droneId")
     Drone getDroneByDroneId(@Param("droneId") String droneId);
 
 }

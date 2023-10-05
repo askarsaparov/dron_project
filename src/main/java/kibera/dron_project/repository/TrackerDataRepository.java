@@ -9,7 +9,8 @@ import java.util.List;
 public interface TrackerDataRepository extends JpaRepository<TrackerData, Long> {
 
 
-    @Query(value = "SELECT td FROM TrackerData td")
+    @Query(value = "SELECT * FROM tracker_data td WHERE (SELECT target FROM drone d WHERE d.drone_id = td.drone_id) = true", nativeQuery = true)
     List<TrackerData> getAllData();
+
 
 }
