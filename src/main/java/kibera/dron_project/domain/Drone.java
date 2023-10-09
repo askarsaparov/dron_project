@@ -1,6 +1,6 @@
 package kibera.dron_project.domain;
 import jakarta.persistence.*;
-import kibera.dron_project.enums.Mood;
+import kibera.dron_project.enums.Condition;
 import kibera.dron_project.enums.Status;
 
 import lombok.*;
@@ -38,9 +38,9 @@ public class Drone {
     @Column(name = "production_year")
     private Long productionYear;
 
-    @Column(name = "mood", nullable = false)
+    @Column(name = "condition", nullable = false)
     @Enumerated(EnumType.STRING)
-    private Mood mood;
+    private Condition condition;
 
     @ManyToOne
     private Organization owner;
@@ -95,8 +95,8 @@ public class Drone {
         return this;
     }
 
-    public Drone mood(Mood mood) {
-        this.mood = mood;
+    public Drone condition(Condition mood) {
+        this.condition = condition;
         return this;
     }
 

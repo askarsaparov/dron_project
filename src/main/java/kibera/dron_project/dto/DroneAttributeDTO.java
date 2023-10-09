@@ -1,6 +1,6 @@
 package kibera.dron_project.dto;
 
-import kibera.dron_project.enums.Mood;
+import kibera.dron_project.enums.Condition;
 import kibera.dron_project.enums.Status;
 import lombok.*;
 
@@ -17,7 +17,7 @@ public class DroneAttributeDTO {
     private String model;
     private String manufacturer;
     private String countryOrigin;
-    private Mood mood;
+    private Condition condition;
     private Status status;
     private Boolean target;
 }
