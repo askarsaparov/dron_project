@@ -1,10 +1,13 @@
 package kibera.dron_project.web.rest;
 
 import kibera.dron_project.domain.Drone;
+import kibera.dron_project.domain.Organization;
 import kibera.dron_project.dto.DroneDTO;
 import kibera.dron_project.dto.DroneSaveDTO;
+import kibera.dron_project.enums.Condition;
 import kibera.dron_project.service.DroneService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,4 +61,14 @@ public class DroneResource {
     public List<Drone> searchDrone(@RequestParam String value) {
         return droneService.searchDrone(value);
     }
+
+    @GetMapping("/drone/filter")
+    public List<Drone> filterDrone(@RequestParam(required = false) Long organizationId, @RequestParam(required = false) Condition condition) {
+        if (organizationId != null) {
+            return droneService.filterDroneOrganizationId(organizationId);
+        }
+        return droneService.filterDrone(condition);
+
+    }
+
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import kibera.dron_project.domain.Drone;
 import kibera.dron_project.dto.DroneDTO;
 import kibera.dron_project.dto.DroneSaveDTO;
+import kibera.dron_project.enums.Condition;
 import kibera.dron_project.mapper.DroneMapper;
 import kibera.dron_project.repository.DroneRepository;
 import lombok.RequiredArgsConstructor;
@@ -50,5 +51,13 @@ public class DroneService {
 
     public List<Drone> searchDrone(String keyword) {
         return droneRepository.searchDrone(keyword);
+    }
+
+    public List<Drone> filterDrone(Condition condition) {
+        return droneRepository.filterDrone(condition);
+    }
+
+    public List<Drone> filterDroneOrganizationId(Long organizationId) {
+        return droneRepository.filterDroneOrganizationId(organizationId);
     }
 }

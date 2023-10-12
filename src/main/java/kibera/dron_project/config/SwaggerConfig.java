@@ -5,6 +5,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-//@OpenAPIDefinition(servers = {@Server(url = "http://gumbaz.samar.uz/", description = "Server URL")})
+@OpenAPIDefinition(servers = {@Server(url = "http://gumbaz.samar.uz/", description = "Server URL")})
 public class SwaggerConfig {
 }

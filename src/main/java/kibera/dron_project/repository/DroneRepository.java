@@ -1,6 +1,8 @@
 package kibera.dron_project.repository;
 
 import kibera.dron_project.domain.Drone;
+import kibera.dron_project.domain.Organization;
+import kibera.dron_project.enums.Condition;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -25,5 +27,11 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
 
     @Query("SELECT u FROM Drone u WHERE u.name LIKE %:keyword% or u.drone_id LIKE %:keyword%")
     List<Drone> searchDrone(String keyword);
+
+    @Query("SELECT u FROM Drone u WHERE u.condition=:condition")
+    List<Drone> filterDrone(Condition condition);
+
+    @Query(value = "SELECT * FROM drone WHERE owner_id = :organizationId", nativeQuery = true)
+    List<Drone> filterDroneOrganizationId(Long organizationId);
 
 }
