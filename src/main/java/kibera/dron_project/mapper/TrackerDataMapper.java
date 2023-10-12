@@ -4,6 +4,9 @@ import kibera.dron_project.domain.TrackerData;
 import kibera.dron_project.dto.DroneAttributeDTO;
 import kibera.dron_project.dto.TrackerDataDTO;
 
+import java.sql.Timestamp;
+
+
 public class TrackerDataMapper {
     public static TrackerDataDTO toDTO(TrackerData entity, DroneAttributeDTO attributusDTO) {
         return TrackerDataDTO
@@ -11,7 +14,7 @@ public class TrackerDataMapper {
                 .id(entity.getId())
                 .length(entity.getLength())
                 .record(entity.getRecord())
-                .timestamp(entity.getTimestamp())
+                .timestamp(new Timestamp(Long.parseLong(entity.getTimestamp())).toString())
                 .priority(entity.getPriority())
                 .latitude(entity.getLatitude())
                 .longitude(entity.getLongitude())

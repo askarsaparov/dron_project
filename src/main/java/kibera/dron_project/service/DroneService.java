@@ -37,15 +37,18 @@ public class DroneService {
                 .toList();
     }
 
-    public DroneDTO createDrone(DroneSaveDTO droneDTO) {
-        return DroneMapper.toDTO(
-                droneRepository.save(DroneMapper.toEntity(droneDTO))
-        );
+    public DroneSaveDTO createDrone(DroneSaveDTO droneDTO) {
+        droneRepository.save(DroneMapper.toEntity(droneDTO));
+        return droneDTO;
     }
 
     public DroneDTO updateDrone(DroneSaveDTO droneDTO) {
         return DroneMapper.toDTO(
                 droneRepository.save(DroneMapper.toEntity(droneDTO))
         );
+    }
+
+    public List<Drone> searchDrone(String keyword) {
+        return droneRepository.searchDrone(keyword);
     }
 }

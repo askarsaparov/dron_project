@@ -1,5 +1,6 @@
 package kibera.dron_project.web.rest;
 
+import kibera.dron_project.domain.Drone;
 import kibera.dron_project.dto.DroneDTO;
 import kibera.dron_project.dto.DroneSaveDTO;
 import kibera.dron_project.service.DroneService;
@@ -51,5 +52,10 @@ public class DroneResource {
     @DeleteMapping("/drone/{id}")
     public void delete(@PathVariable Long id) {
         droneService.delete(id);
+    }
+
+    @GetMapping("/drone/search")
+    public List<Drone> searchDrone(@RequestParam String value) {
+        return droneService.searchDrone(value);
     }
 }

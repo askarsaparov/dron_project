@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -21,5 +22,8 @@ public interface DroneRepository extends JpaRepository<Drone, Long> {
 
     @Query("select dr from Drone dr where dr.drone_id = :droneId")
     Drone getDroneByDroneId(@Param("droneId") String droneId);
+
+    @Query("SELECT u FROM Drone u WHERE u.name LIKE %:keyword% or u.drone_id LIKE %:keyword%")
+    List<Drone> searchDrone(String keyword);
 
 }

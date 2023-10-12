@@ -1,7 +1,5 @@
 package kibera.dron_project.web.rest;
 
-import kibera.dron_project.dto.DroneDTO;
-import kibera.dron_project.dto.DroneSaveDTO;
 import kibera.dron_project.dto.RegionDTO;
 import kibera.dron_project.service.RegionService;
 import lombok.RequiredArgsConstructor;

@@ -43,10 +43,9 @@ public class EmployeeService {
                 .toList();
     }
 
-    public EmployeeDTO createEmployee(EmployeeSaveDTO employeeDTO) {
-        return EmployeeMapper.toDTO(
-                employeeRepository.save(EmployeeMapper.toEntity(employeeDTO))
-        );
+    public EmployeeSaveDTO createEmployee(EmployeeSaveDTO employeeDTO) {
+        employeeRepository.save(EmployeeMapper.toEntity(employeeDTO));
+        return employeeDTO;
     }
 
     public EmployeeDTO updateEmployee(EmployeeSaveDTO employeeDTO) {

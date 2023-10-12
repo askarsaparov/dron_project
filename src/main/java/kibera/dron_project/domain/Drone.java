@@ -95,7 +95,7 @@ public class Drone {
         return this;
     }
 
-    public Drone condition(Condition mood) {
+    public Drone condition(Condition condition) {
         this.condition = condition;
         return this;
     }
