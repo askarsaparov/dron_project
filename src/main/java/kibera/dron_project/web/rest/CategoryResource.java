@@ -1,5 +1,8 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
+import kibera.dron_project.domain.Category;
+import kibera.dron_project.domain.Object;
 import kibera.dron_project.dto.CategoryDTO;
 import kibera.dron_project.dto.PostionDTO;
 import kibera.dron_project.service.CategoryService;
@@ -24,7 +27,7 @@ public class CategoryResource {
     }
 
     @PostMapping("/category")
-    public ResponseEntity<CategoryDTO> create(@RequestBody CategoryDTO categoryDTO) {
+    public ResponseEntity<CategoryDTO> create(@RequestBody @Valid CategoryDTO categoryDTO) {
         return ResponseEntity.ok(
                 categoryService.createCategory(categoryDTO)
         );
@@ -46,5 +49,16 @@ public class CategoryResource {
     @DeleteMapping("/category/{id}")
     public void delete(@PathVariable Long id) {
         categoryService.delete(id);
+    }
+
+    @GetMapping("/category/filter")
+    public List<Category> filterObject(@RequestParam(required = false) Boolean onDashboard) {
+        return categoryService.filterCategory(onDashboard);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/category/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        categoryService.deleteItems(ids);
     }
 }

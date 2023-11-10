@@ -1,5 +1,6 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
 import kibera.dron_project.dto.BrandDTO;
 import kibera.dron_project.dto.PostionDTO;
 import kibera.dron_project.service.BrandService;
@@ -25,7 +26,7 @@ public class BrandResource {
     }
 
     @PostMapping("/brand")
-    public ResponseEntity<BrandDTO> create(@RequestBody BrandDTO brandDTO) {
+    public ResponseEntity<BrandDTO> create(@RequestBody @Valid BrandDTO brandDTO) {
         return ResponseEntity.ok(
                 brandService.createBrand(brandDTO)
         );
@@ -47,5 +48,11 @@ public class BrandResource {
     @DeleteMapping("/brand/{id}")
     public void delete(@PathVariable Long id) {
         brandService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/brand/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        brandService.deleteItems(ids);
     }
 }

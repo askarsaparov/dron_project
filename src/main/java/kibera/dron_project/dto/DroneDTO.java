@@ -13,14 +13,14 @@ public class DroneDTO {
     private Long id;
     private String drone_id;
     private String name;
-    private String brand;
+    private BrandDTO brandDTO;
     private String model;
-    private String manufacturer;
-    private String countryOrigin;
+    private ManufacturerDTO manufacturerDTO;
+    private CountryOriginDTO countryOriginDTO;
     private Long productionYear;
     private Condition condition;
-    private OrganizationDTO owner;
-    private EmployeeDTO operatorId;
+    private OrganizationDTO ownerDTO;
+    private EmployeeDTO operatorDTO;
     private Status status;
     private Boolean target;
 }

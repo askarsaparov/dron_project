@@ -14,5 +14,8 @@ public interface EmployeeRepository extends JpaRepository<Employee , Long> {
     @Query("UPDATE Employee e SET e.organization = null WHERE e.organization.id = :organizationId")
     void setNullWhichHasDeletedOrganization(@Param("organizationId") Long organizationId);
 
+    @Modifying
+    @Query("UPDATE Employee e SET e.position = null WHERE e.position.id = :positionId")
+    void setNullWhichHasDeletedPosition(@Param("positionId") Long id);
 
 }

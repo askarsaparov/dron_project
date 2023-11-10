@@ -1,5 +1,6 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
 import kibera.dron_project.dto.ManufacturerDTO;
 import kibera.dron_project.dto.PostionDTO;
 import kibera.dron_project.service.ManufacturerService;
@@ -24,7 +25,7 @@ public class ManufacturerResource {
     }
 
     @PostMapping("/manufacturer")
-    public ResponseEntity<ManufacturerDTO> create(@RequestBody ManufacturerDTO manufacturerDTO) {
+    public ResponseEntity<ManufacturerDTO> create(@RequestBody @Valid ManufacturerDTO manufacturerDTO) {
         return ResponseEntity.ok(
                 manufacturerService.createManufacturer(manufacturerDTO)
         );
@@ -46,5 +47,11 @@ public class ManufacturerResource {
     @DeleteMapping("/manufacturer/{id}")
     public void delete(@PathVariable Long id) {
         manufacturerService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/manufacturer/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        manufacturerService.deleteItems(ids);
     }
 }

@@ -17,23 +17,23 @@ public class Drone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "drone_id")
+    @Column(name = "drone_id", unique = true)
     private String drone_id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "brand")
-    private String brand;
+    @ManyToOne
+    private Brand brand;
 
     @Column(name = "model")
     private String model;
 
-    @Column(name = "manufacturer")
-    private String manufacturer;
+    @ManyToOne()
+    private Manufacturer manufacturer;
 
-    @Column(name = "country_origin")
-    private String countryOrigin;
+    @ManyToOne
+    private CountryOrigin countryOrigin;
 
     @Column(name = "production_year")
     private Long productionYear;
@@ -70,7 +70,7 @@ public class Drone {
         return this;
     }
 
-    public Drone brand(String brand) {
+    public Drone brand(Brand brand) {
         this.brand = brand;
         return this;
     }
@@ -80,12 +80,12 @@ public class Drone {
         return this;
     }
 
-    public Drone manufacturer(String manufacturer) {
+    public Drone manufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
         return this;
     }
 
-    public Drone countryOrigin(String countryOrigin) {
+    public Drone countryOrigin(CountryOrigin countryOrigin) {
         this.countryOrigin = countryOrigin;
         return this;
     }

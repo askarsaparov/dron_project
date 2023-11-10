@@ -1,5 +1,6 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
 import kibera.dron_project.dto.PostionDTO;
 import kibera.dron_project.service.PositionService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class PositionResource {
     }
 
     @PostMapping("/position")
-    public ResponseEntity<PostionDTO> create(@RequestBody PostionDTO postionDTO) {
+    public ResponseEntity<PostionDTO> create(@RequestBody @Valid PostionDTO postionDTO) {
         return ResponseEntity.ok(
                 positionService.createPosition(postionDTO)
         );
@@ -45,6 +46,12 @@ public class PositionResource {
     @DeleteMapping("/position/{id}")
     public void delete(@PathVariable Long id) {
         positionService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/position/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        positionService.deleteItems(ids);
     }
 
 }

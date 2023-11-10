@@ -1,5 +1,6 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
 import kibera.dron_project.dto.CountryOriginDTO;
 import kibera.dron_project.dto.PostionDTO;
 import kibera.dron_project.service.CountryOriginService;
@@ -24,7 +25,7 @@ public class CountryOriginResource {
     }
 
     @PostMapping("/country-origin")
-    public ResponseEntity<CountryOriginDTO> create(@RequestBody CountryOriginDTO countryOriginDTO) {
+    public ResponseEntity<CountryOriginDTO> create(@RequestBody @Valid CountryOriginDTO countryOriginDTO) {
         return ResponseEntity.ok(
                 countryOriginService.createCountryOrigin(countryOriginDTO)
         );
@@ -46,5 +47,11 @@ public class CountryOriginResource {
     @DeleteMapping("/country-origin/{id}")
     public void delete(@PathVariable Long id) {
         countryOriginService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/country-origin/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        countryOriginService.deleteItems(ids);
     }
 }

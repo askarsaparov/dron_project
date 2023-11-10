@@ -55,4 +55,10 @@ public class EmployeeService {
     }
 
 
+    public void deleteItems(List<Long> ids) {
+        for (Long id : ids) {
+            droneRepository.setNullWhichHasDeletedEmployee(id);
+            employeeRepository.deleteById(id);
+        }
+    }
 }

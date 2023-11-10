@@ -1,4 +1,5 @@
 package kibera.dron_project.web.rest;
+import jakarta.validation.Valid;
 import kibera.dron_project.dto.EmployeeDTO;
 import kibera.dron_project.dto.EmployeeSaveDTO;
 import kibera.dron_project.service.EmployeeService;
@@ -24,7 +25,7 @@ public class EmployeeResource {
     }
 
     @PostMapping("/employee")
-    public ResponseEntity<?> create(@RequestBody EmployeeSaveDTO employeeDTO) {
+    public ResponseEntity<?> create(@RequestBody @Valid EmployeeSaveDTO employeeDTO) {
         return ResponseEntity.ok(
                 employeeService.createEmployee(employeeDTO)
         );
@@ -52,6 +53,12 @@ public class EmployeeResource {
     @DeleteMapping("/employee/{id}")
     public void delete(@PathVariable Long id) {
         employeeService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/employee/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        employeeService.deleteItems(ids);
     }
 
 }

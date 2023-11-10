@@ -10,12 +10,14 @@ public class CategoryMapper {
                 .builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .onDashboard(entity.getOnDashboard())
                 .build();
     }
 
     public static Category toEntity(CategoryDTO dto) {
         return new Category()
                 .id(dto.getId())
-                .name(dto.getName());
+                .name(dto.getName())
+                .onDashboard(dto.getOnDashboard());
     }
 }

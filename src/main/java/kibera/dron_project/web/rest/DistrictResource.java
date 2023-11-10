@@ -1,5 +1,8 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
+import kibera.dron_project.domain.Category;
+import kibera.dron_project.domain.District;
 import kibera.dron_project.dto.DistrictDTO;
 import kibera.dron_project.dto.DistrictSaveDTO;
 import kibera.dron_project.dto.EmployeeDTO;
@@ -27,7 +30,7 @@ public class DistrictResource {
     }
 
     @PostMapping("/district")
-    public ResponseEntity<DistrictSaveDTO> create(@RequestBody DistrictSaveDTO districtSaveDTO) {
+    public ResponseEntity<DistrictSaveDTO> create(@RequestBody @Valid DistrictSaveDTO districtSaveDTO) {
         return ResponseEntity.ok(
                 districtService.createDistrict(districtSaveDTO)
         );
@@ -55,5 +58,16 @@ public class DistrictResource {
     @DeleteMapping("/district/{id}")
     public void delete(@PathVariable Long id) {
         districtService.delete(id);
+    }
+
+    @GetMapping("/district/filter")
+    public List<District> filterDistrict(@RequestParam(required = false) Long region_id) {
+        return districtService.filterDistrict(region_id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/district/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        districtService.deleteItems(ids);
     }
 }

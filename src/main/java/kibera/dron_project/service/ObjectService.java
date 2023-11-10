@@ -48,12 +48,22 @@ public class ObjectService {
     }
 
     public void delete(Long id) {
-        objectRepository.setNullWhichHasDeletedCategory(id);
-
         objectRepository.deleteById(id);
     }
 
-    public List<Object> searchObject(String keyword) {
-        return objectRepository.searchObject(keyword);
+    public List<Object> searchObject(String keyword, Long category) {
+        return (category != null) ?
+                objectRepository.searchObject(keyword, category):
+                objectRepository.searchObject(keyword);
+    }
+
+    public List<Object> filterObject(Long id) {
+        return objectRepository.filterObject(id);
+    }
+
+    public void deleteItems(List<Long> ids) {
+        for (Long id : ids) {
+            objectRepository.deleteById(id);
+        }
     }
 }

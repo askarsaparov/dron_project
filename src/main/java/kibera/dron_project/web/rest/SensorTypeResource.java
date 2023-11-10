@@ -1,5 +1,6 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
 import kibera.dron_project.dto.PostionDTO;
 import kibera.dron_project.dto.SensorTypeDTO;
 import kibera.dron_project.service.PositionService;
@@ -24,7 +25,7 @@ public class SensorTypeResource {
     }
 
     @PostMapping("/sensor-type")
-    public ResponseEntity<SensorTypeDTO> create(@RequestBody SensorTypeDTO sensorTypeDTO) {
+    public ResponseEntity<SensorTypeDTO> create(@RequestBody @Valid SensorTypeDTO sensorTypeDTO) {
         return ResponseEntity.ok(
                 sensorTypeService.createSensorType(sensorTypeDTO)
         );
@@ -46,5 +47,11 @@ public class SensorTypeResource {
     @DeleteMapping("/sensor-type/{id}")
     public void delete(@PathVariable Long id) {
         sensorTypeService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/sensor-type/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        sensorTypeService.deleteItems(ids);
     }
 }

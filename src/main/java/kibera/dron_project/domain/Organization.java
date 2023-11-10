@@ -1,9 +1,14 @@
 package kibera.dron_project.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.io.Serializable;
-
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="organization")
 @Entity
 public class Organization {
@@ -14,57 +19,45 @@ public class Organization {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "region")
-    private String region;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Region region;
 
-    @Column(name = "district")
-    private String district;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private District district;
 
     @Column(name = "address")
     private String address;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    @Column(name = "color")
+    private String color;
 
     public Organization id(Long id) {
         this.id = id;
+        return this;
+    }
+
+    public Organization name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public Organization region(Region region) {
+        this.region = region;
+        return this;
+    }
+
+    public Organization district(District district) {
+        this.district = district;
+        return this;
+    }
+
+    public Organization address(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public Organization color(String color) {
+        this.color = color;
         return this;
     }
 }

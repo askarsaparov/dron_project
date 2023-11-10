@@ -17,8 +17,8 @@ public class EmployeeDTO {
     private String firstName;
     private String lastName;
     private String surname;
-    private OrganizationDTO organization;
-    private String position;
+    private OrganizationDTO organizationDTO;
+    private PostionDTO positionDTO;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
     private String placeOfBirth;

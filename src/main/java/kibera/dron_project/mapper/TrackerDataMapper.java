@@ -14,7 +14,7 @@ public class TrackerDataMapper {
                 .id(entity.getId())
                 .length(entity.getLength())
                 .record(entity.getRecord())
-                .timestamp(new Timestamp(Long.parseLong(entity.getTimestamp())).toString())
+                .timestamp(entity.getTimestamp().toString())
                 .priority(entity.getPriority())
                 .latitude(entity.getLatitude())
                 .longitude(entity.getLongitude())

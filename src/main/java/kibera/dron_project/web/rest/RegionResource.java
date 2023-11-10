@@ -1,5 +1,6 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
 import kibera.dron_project.dto.RegionDTO;
 import kibera.dron_project.service.RegionService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class RegionResource {
     }
 
     @PostMapping("/region")
-    public ResponseEntity<?> create(@RequestBody RegionDTO regionDTO) {
+    public ResponseEntity<?> create(@RequestBody @Valid RegionDTO regionDTO) {
         return ResponseEntity.ok(
                 regionService.createRegion(regionDTO)
         );
@@ -50,5 +51,11 @@ public class RegionResource {
     @DeleteMapping("/region/{id}")
     public void delete(@PathVariable Long id) {
         regionService.delete(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/region/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        regionService.deleteItems(ids);
     }
 }

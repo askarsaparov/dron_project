@@ -1,5 +1,6 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.validation.Valid;
 import kibera.dron_project.domain.Object;
 import kibera.dron_project.dto.ObjectDTO;
 import kibera.dron_project.dto.ObjectSaveDTO;
@@ -24,7 +25,7 @@ public class ObjectResource {
     }
 
     @PostMapping("/object")
-    public ResponseEntity<ObjectSaveDTO> create(@RequestBody ObjectSaveDTO objectSaveDTO) {
+    public ResponseEntity<ObjectSaveDTO> create(@RequestBody @Valid ObjectSaveDTO objectSaveDTO) {
         return ResponseEntity.ok(
                 objectService.createObject(objectSaveDTO)
         );
@@ -55,8 +56,19 @@ public class ObjectResource {
     }
 
     @GetMapping("/object/search")
-    public List<Object> searchObject(@RequestParam String name) {
-        return objectService.searchObject(name);
+    public List<Object> searchObject(@RequestParam(required = false) String name, @RequestParam(required = false) Long category) {
+        return objectService.searchObject(name, category);
+    }
+
+    @GetMapping("/object/filter")
+    public List<Object> filterObject(@RequestParam(required = false) Long category_id) {
+        return objectService.filterObject(category_id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/object/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        objectService.deleteItems(ids);
     }
 
 }

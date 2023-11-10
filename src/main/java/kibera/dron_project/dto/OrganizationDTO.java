@@ -11,8 +11,8 @@ public class OrganizationDTO {
 
     private Long id;
     private String name;
-    private String region;
-    private String district;
+    private RegionDTO regionDTO;
+    private DistrictDTO districtDTO;
     private String address;
-
+    private String color;
 }

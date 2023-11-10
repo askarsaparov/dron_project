@@ -1,7 +1,12 @@
 package kibera.dron_project.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
+
+import java.sql.Timestamp;
 
 @Builder
 @Getter
@@ -18,6 +23,9 @@ public class Category {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "on_dashboard")
+    private Boolean onDashboard;
+
     public Category id(Long id) {
         this.id = id;
         return this;
@@ -25,6 +33,11 @@ public class Category {
 
     public Category name(String name) {
         this.name = name;
+        return this;
+    }
+
+    public Category onDashboard(Boolean onDashboard) {
+        this.onDashboard = onDashboard;
         return this;
     }
 }

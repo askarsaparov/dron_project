@@ -4,6 +4,9 @@ import jakarta.persistence.EntityNotFoundException;
 import kibera.dron_project.domain.Region;
 import kibera.dron_project.dto.RegionDTO;
 import kibera.dron_project.mapper.RegionMapper;
+import kibera.dron_project.repository.DistrictRepository;
+import kibera.dron_project.repository.ObjectRepository;
+import kibera.dron_project.repository.OrganizationRepository;
 import kibera.dron_project.repository.RegionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RegionService {
     private final RegionRepository regionRepository;
+    private final OrganizationRepository organizationRepository;
+    private final DistrictRepository districtRepository;
+    private final ObjectRepository objectRepository;
+
 
     public RegionDTO findById(Long id) {
         return regionRepository
@@ -25,6 +32,10 @@ public class RegionService {
     }
 
     public void delete(Long id) {
+        organizationRepository.setNullWhichHasDeletedRegion(id);
+        districtRepository.setNullWhichHasDeletedRegion(id);
+        objectRepository.setNullWhichHasDeletedRegion(id);
+
         regionRepository.deleteById(id);
     }
 
@@ -46,5 +57,15 @@ public class RegionService {
         return RegionMapper.toDTO(
                 regionRepository.save(RegionMapper.toEntity(regionDTO))
         );
+    }
+
+    public void deleteItems(List<Long> ids) {
+        for (Long id : ids) {
+            organizationRepository.setNullWhichHasDeletedRegion(id);
+            districtRepository.setNullWhichHasDeletedRegion(id);
+            objectRepository.setNullWhichHasDeletedRegion(id);
+
+            regionRepository.deleteById(id);
+        }
     }
 }

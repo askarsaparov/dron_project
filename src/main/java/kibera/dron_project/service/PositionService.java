@@ -7,6 +7,8 @@ import kibera.dron_project.dto.PostionDTO;
 import kibera.dron_project.dto.RegionDTO;
 import kibera.dron_project.mapper.PositionMapper;
 import kibera.dron_project.mapper.RegionMapper;
+import kibera.dron_project.repository.EmployeeRepository;
+import kibera.dron_project.repository.OrganizationRepository;
 import kibera.dron_project.repository.PositionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PositionService {
     private final PositionRepository positionRepository;
+    private final EmployeeRepository employeeRepository;
 
     public List<PostionDTO> getAllPosition() {
         List<Position> positions = positionRepository.findAll();
@@ -48,6 +51,15 @@ public class PositionService {
     }
 
     public void delete(Long id) {
+        employeeRepository.setNullWhichHasDeletedPosition(id);
+
         positionRepository.deleteById(id);
+    }
+
+    public void deleteItems(List<Long> ids) {
+        for (Long id : ids) {
+            employeeRepository.setNullWhichHasDeletedPosition(id);
+            positionRepository.deleteById(id);
+        }
     }
 }

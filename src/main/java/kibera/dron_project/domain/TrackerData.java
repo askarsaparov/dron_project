@@ -1,7 +1,10 @@
 package kibera.dron_project.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.sql.Timestamp;
 
 @Builder
 @Getter
@@ -21,8 +24,9 @@ public class TrackerData {
     @Column(name = "record")
     private String record;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "timestamp")
-    private String timestamp;
+    private Timestamp timestamp;
 
     @Column(name = "priority")
     private String priority;
@@ -63,7 +67,7 @@ public class TrackerData {
         return this;
     }
 
-    public TrackerData timestamp(String timestamp) {
+    public TrackerData timestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
         return this;
     }

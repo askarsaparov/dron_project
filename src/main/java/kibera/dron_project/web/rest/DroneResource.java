@@ -1,10 +1,15 @@
 package kibera.dron_project.web.rest;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import kibera.dron_project.domain.Drone;
 import kibera.dron_project.domain.Organization;
 import kibera.dron_project.dto.DroneDTO;
+import kibera.dron_project.dto.DroneFollowDTO;
 import kibera.dron_project.dto.DroneSaveDTO;
 import kibera.dron_project.enums.Condition;
+import kibera.dron_project.mapper.DroneMapper;
+import kibera.dron_project.repository.DroneRepository;
 import kibera.dron_project.service.DroneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.repository.query.Param;
@@ -19,33 +24,29 @@ import java.util.List;
 @RestController
 public class DroneResource {
     private final DroneService droneService;
+    private final DroneRepository droneRepository;
 
     @GetMapping("/drone")
-    public ResponseEntity<?> getAll() {
-        List<DroneDTO> droneList =  droneService.getAllDrone();
+    public ResponseEntity<List<DroneDTO>> getAll() {
+        List<DroneDTO> droneList = droneService.getAllDrone();
         return ResponseEntity.ok(droneList);
     }
 
     @PostMapping("/drone")
-    public ResponseEntity<?> create(@RequestBody DroneSaveDTO droneDTO) {
+    public ResponseEntity<DroneSaveDTO> create(@RequestBody @Valid DroneSaveDTO droneDTO) {
         return ResponseEntity.ok(
                 droneService.createDrone(droneDTO)
         );
     }
 
     @GetMapping("/drone/{id}") // This maps to a GET request with a path parameter {id}
-    public ResponseEntity<?> getById(@PathVariable Long id) {
+    public ResponseEntity<DroneDTO> getById(@PathVariable Long id) {
         DroneDTO drone = droneService.findById(id);
-
-        if (drone != null) {
-            return ResponseEntity.ok(drone); // Return 200 OK with the resource
-        } else {
-            return ResponseEntity.notFound().build(); // Return 404 Not Found if the resource doesn't exist
-        }
+        return ResponseEntity.ok(drone);
     }
 
     @PutMapping("/drone")
-    public ResponseEntity<?> update(@RequestBody DroneSaveDTO droneDTO) {
+    public ResponseEntity<DroneDTO> update(@RequestBody DroneSaveDTO droneDTO) {
         return ResponseEntity.ok(
                 droneService.updateDrone(droneDTO)
         );
@@ -57,18 +58,33 @@ public class DroneResource {
         droneService.delete(id);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/drone/multidelete")
+    public void deleteItems(@RequestBody List<Long> ids) {
+        droneService.deleteItems(ids);
+    }
+
     @GetMapping("/drone/search")
     public List<Drone> searchDrone(@RequestParam String value) {
         return droneService.searchDrone(value);
     }
 
     @GetMapping("/drone/filter")
-    public List<Drone> filterDrone(@RequestParam(required = false) Long organizationId, @RequestParam(required = false) Condition condition) {
+    public List<Drone> filterDrone(@RequestParam(required = false) Long organizationId, @RequestParam(required = false) Condition condition,
+                                   @RequestParam(required = false) String droneId) {
         if (organizationId != null) {
             return droneService.filterDroneOrganizationId(organizationId);
         }
-        return droneService.filterDrone(condition);
+        if (condition != null) {
+            return droneService.filterDrone(condition);
+        }
+        return droneService.filterDroneId(droneId);
+    }
 
+    @PutMapping("/drone/follow/{id}")
+    public ResponseEntity<DroneDTO> updateDroneTarget(@PathVariable Long id, @RequestBody DroneFollowDTO droneFollowDTO) {
+        DroneDTO response = droneService.updateTarget(id, droneFollowDTO);
+        return ResponseEntity.ok(response);
     }
 
 }

@@ -1,8 +1,12 @@
 package kibera.dron_project.service;
 
+import java.util.Map;
+import java.util.Optional;
+
 import jakarta.persistence.EntityNotFoundException;
 import kibera.dron_project.domain.Drone;
 import kibera.dron_project.dto.DroneDTO;
+import kibera.dron_project.dto.DroneFollowDTO;
 import kibera.dron_project.dto.DroneSaveDTO;
 import kibera.dron_project.enums.Condition;
 import kibera.dron_project.mapper.DroneMapper;
@@ -59,5 +63,26 @@ public class DroneService {
 
     public List<Drone> filterDroneOrganizationId(Long organizationId) {
         return droneRepository.filterDroneOrganizationId(organizationId);
+    }
+
+    public List<Drone> filterDroneId(String droneId) {
+        return droneRepository.filterDroneId(droneId);
+    }
+
+    public DroneDTO updateTarget(Long id, DroneFollowDTO droneFollowDTO) {
+
+        Drone drone = droneRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Drone not found"));
+
+        drone.setTarget(droneFollowDTO.getTarget());
+
+        return DroneMapper.toDTO(droneRepository.save(drone));
+    }
+
+    public void deleteItems(List<Long> ids) {
+        for (Long id : ids) {
+            droneRepository.deleteById(id);
+        }
     }
 }
